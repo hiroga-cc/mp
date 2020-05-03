@@ -1,1 +1,1 @@
-rootProject.name = "maven-search"
+rootProject.name = "mp"

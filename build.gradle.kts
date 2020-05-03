@@ -1,4 +1,4 @@
-val app = "maven-search"
+val app = "mp"
 
 buildscript {
     repositories {
