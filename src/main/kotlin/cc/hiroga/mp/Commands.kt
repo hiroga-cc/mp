@@ -1,4 +1,4 @@
-package cc.hiroga.mavenSearch
+package cc.hiroga.mp
 
 import com.github.ajalt.clikt.core.CliktCommand
 import com.github.ajalt.clikt.parameters.arguments.argument
@@ -11,7 +11,7 @@ class Command : CliktCommand() {
 class SearchCommand : CliktCommand(name = "search") {
     val keyword: List<String> by argument().multiple()
     override fun run() {
-        val pacs = Search.jCenter(keyword[0])
-        println(pacs)
+        val packages = Search.search(keyword[0])
+        println(packages)
     }
 }

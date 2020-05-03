@@ -1,4 +1,4 @@
-package cc.hiroga.mavenSearch
+package cc.hiroga.mp
 
 import com.github.ajalt.clikt.core.subcommands
 

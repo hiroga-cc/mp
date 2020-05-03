@@ -19,7 +19,7 @@ plugins {
 group = "cc.hiroga"
 version = "1.0-SNAPSHOT"
 
-application.mainClassName = "cc.hiroga.mavenSearch.ApplicationKt"
+application.mainClassName = "cc.hiroga.mp.ApplicationKt"
 
 repositories {
     mavenCentral()
@@ -31,6 +31,7 @@ dependencies {
     implementation("com.github.ajalt", "clikt", clikt_version)
     implementation("com.github.kittinunf.fuel", "fuel-gson", "2.0.1")
     implementation("com.google.code.gson", "gson", "2.8.6")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     testCompile("junit", "junit", "4.12")
 }
 
