@@ -18,7 +18,7 @@ object Search {
 
     fun mavenCentral(keyword: String): List<Package> {
         val res =
-            Fuel.get("http://search.maven.org/solrsearch/select", listOf(Pair("q",keyword), Pair("rows",100))).responseString().third.get()
+            Fuel.get("https://search.maven.org/solrsearch/select", listOf(Pair("q",keyword), Pair("rows",100))).responseString().third.get()
         return gson.fromJson<MavenCentralResponse>(
             res,
             MavenCentralResponse::class.java
