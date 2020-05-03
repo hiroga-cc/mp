@@ -7,6 +7,8 @@ object Search {
     private val gson =
         GsonBuilder().serializeNulls()
             .registerTypeAdapter(MavenCentralResponse::class.java, MavenCentralResponseDeserializer())
+            .registerTypeAdapter(MavenCentralResponseBody::class.java, MavenCentralResponseBodyDeserializer())
+            .registerTypeAdapter(MavenCentralPackage::class.java, MavenCentralPackageDeserializer())
             .registerTypeAdapter(BintrayPackage::class.java, BintrayPackageDeserializer())
             .create()
 
