@@ -15,9 +15,8 @@ object Search {
     }
 
     fun mavenCentral(keyword: String): List<Package> {
-        println("keyword: $keyword")
         val res =
-            Fuel.get("http://search.maven.org/solrsearch/select?q=${keyword}&rows=100").responseString().third.get()
+            Fuel.get("http://search.maven.org/solrsearch/select", listOf(Pair("q",keyword), Pair("rows",100))).responseString().third.get()
         return gson.fromJson<MavenCentralResponse>(
             res,
             MavenCentralResponse::class.java
@@ -25,10 +24,9 @@ object Search {
     }
 
     fun jCenter(keyword: String): List<Package> {
-        println("keyword: $keyword")
-        val res1 = Fuel.get("https://api.bintray.com/search/packages/maven?g=*${keyword}*").responseString().third.get()
+        val res1 = Fuel.get("https://api.bintray.com/search/packages/maven", listOf(Pair("g","*${keyword}*"))).responseString().third.get()
         val obj1 = gson.fromJson<List<BintrayPackage>>(res1, bintrayPackageListType)
-        val res2 = Fuel.get("https://api.bintray.com/search/packages/maven?a=*${keyword}*").responseString().third.get()
+        val res2 = Fuel.get("https://api.bintray.com/search/packages/maven", listOf(Pair("a","*${keyword}*"))).responseString().third.get()
         val obj2 = gson.fromJson<List<BintrayPackage>>(res2, bintrayPackageListType)
         return (obj1 + obj2).map { it.asPackages }.flatten()
     }
