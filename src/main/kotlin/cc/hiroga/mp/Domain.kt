@@ -5,16 +5,16 @@ import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
 import java.net.URL
 
-data class Repository(
-    val name: String,
-    val url: URL,
-    val packages: List<Package>
-)
-
 data class Package(
     val groupId: String,
     val artifactId: String,
     val latestVersion: String
+)
+
+data class SearchPackageResult(
+    val name: String,
+    val url: URL,
+    val packages: List<Package>
 )
 
 data class MavenCentralResponse(
