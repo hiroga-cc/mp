@@ -43,3 +43,7 @@ io.ktor                                  ktor-websockets-kotlinMultiplatform 1.2
 io.ktor                                  ktor-websockets-metadata         1.2.5-1.3.60-eap-76
 .........
 ```
+
+## Inspired By
+
+[koron/maven-search](https://github.com/koron/maven-search)
