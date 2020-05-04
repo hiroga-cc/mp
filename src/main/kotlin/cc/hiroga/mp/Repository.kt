@@ -49,7 +49,7 @@ object JCenter : Repository {
     override fun search(keyword: String): SearchPackageResult {
         // API Guide: https://bintray.com/docs/api/#_maven_package_search
         val byGroupId = getPackages(keyword, listOf(Pair("g", "*${keyword}*")))
-        val byArtifactId = getPackages(keyword, listOf(Pair("g", "*${keyword}*")))
+        val byArtifactId = getPackages(keyword, listOf(Pair("a", "*${keyword}*")))
         return SearchPackageResult(
             name = name,
             url = url,
