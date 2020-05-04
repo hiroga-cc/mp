@@ -114,20 +114,21 @@ data class BintrayPackage(
 ) {
     val asPackages: List<Package>
         get() {
-            return systemIds.map {
-                val (groupId, artifactId) = it.split(":")
-                Package(groupId = groupId, artifactId = artifactId, latestVersion = latestVersion)
+            return systemIds.mapNotNull { it ->
+                it.split(":").takeIf { it.size == 2 }?.let { ids ->
+                    Package(groupId = ids[0], artifactId = ids[1], latestVersion = latestVersion)
+                }
             }
         }
 }
 
-val bintrayPackageListType: Type = object: TypeToken<List<BintrayPackage>>() {}.type
+val bintrayPackageListType: Type = object : TypeToken<List<BintrayPackage>>() {}.type
 
 class BintrayPackageDeserializer : JsonDeserializer<BintrayPackage> {
     override fun deserialize(
         json: JsonElement?, typeOfT: Type?, context: JsonDeserializationContext?
     ): BintrayPackage {
-       val obj =  json as JsonObject
+        val obj = json as JsonObject
         return BintrayPackage(
             obj.get("name").asString,
             obj.get("repo").asString,
