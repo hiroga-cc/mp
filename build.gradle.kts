@@ -54,6 +54,7 @@ tasks {
                 "-jar",
                 "build/libs/${app}-${version}-all.jar",
                 "bin/$app",
+                "--enable-https",
                 "--no-server"
         )
     }

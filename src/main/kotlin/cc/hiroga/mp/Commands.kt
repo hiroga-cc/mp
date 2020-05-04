@@ -11,7 +11,9 @@ class Command : CliktCommand() {
 class SearchCommand : CliktCommand(name = "search") {
     val keyword: List<String> by argument().multiple()
     override fun run() {
-        val packages = Search.search(keyword[0])
-        println(packages)
+        val repos = Search.search(keyword[0])
+        repos.map{
+            Out.out(it)
+        }
     }
 }

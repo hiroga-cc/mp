@@ -3,6 +3,13 @@ package cc.hiroga.mp
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import java.lang.reflect.Type
+import java.net.URL
+
+data class Repository(
+    val name: String,
+    val url: URL,
+    val packages: List<Package>
+)
 
 data class Package(
     val groupId: String,
