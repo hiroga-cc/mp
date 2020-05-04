@@ -29,10 +29,7 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.github.ajalt", "clikt", clikt_version)
-    implementation("com.github.kittinunf.fuel", "fuel", fuel_version)
-    implementation("com.github.kittinunf.fuel", "fuel-coroutines", fuel_version)
     implementation("com.github.kittinunf.fuel", "fuel-gson", fuel_version)
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.5")
     testCompile("junit", "junit", "4.12")
 }
 
