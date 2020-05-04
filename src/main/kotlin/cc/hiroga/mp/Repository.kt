@@ -24,21 +24,18 @@ object MavenRepository : Repository {
         val (_, _, result) =
             Fuel.get("https://search.maven.org/solrsearch/select", listOf(Pair("q", keyword), Pair("rows", 100)))
                 .responseString()
-        return result.fold(
+        val packages = result.fold(
             { data ->
-                SearchPackageResult(
-                    name = name,
-                    url = url,
-                    packages = gson.fromJson(data, MavenCentralResponse::class.java).response.docs
-                        .map { it.asPackage }
-                        .sortedWith(compareBy({ it.groupId }, { it.artifactId }))
-                )
+                gson.fromJson(data, MavenCentralResponse::class.java).response.docs
+                    .map { it.asPackage }
+                    .sortedWith(compareBy({ it.groupId }, { it.artifactId }))
             },
             { error ->
                 println("When request on $name, an error of type ${error.exception} happened: ${error.message}")
-                SearchPackageResult(name = name, url = url, packages = emptyList())
+                emptyList()
             }
         )
+        return SearchPackageResult(name, url, packages)
     }
 }
 
@@ -50,13 +47,10 @@ object JCenter : Repository {
         // API Guide: https://bintray.com/docs/api/#_maven_package_search
         val byGroupId = getPackages(keyword, listOf(Pair("g", "*${keyword}*")))
         val byArtifactId = getPackages(keyword, listOf(Pair("a", "*${keyword}*")))
-        return SearchPackageResult(
-            name = name,
-            url = url,
-            packages = (byGroupId + byArtifactId)
-                .distinct()
-                .sortedWith(compareBy({ it.groupId }, { it.artifactId }))
-        )
+        val packages = (byGroupId + byArtifactId)
+            .distinct()
+            .sortedWith(compareBy({ it.groupId }, { it.artifactId }))
+        return SearchPackageResult(name, url, packages)
     }
 
     private fun getPackages(keyword: String, queries: List<Query>): List<Package> {
@@ -71,6 +65,5 @@ object JCenter : Repository {
                 emptyList()
             }
         )
-
     }
 }
